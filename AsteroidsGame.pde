@@ -1,15 +1,104 @@
-//your variable declarations here
+SpaceShip boat = new SpaceShip();//your variable declarations here
+
+Star[] shine;
+
 public void setup() 
 {
-  //your code here
+  size(1000,1000);
+  
+  shine = new Star[250];
+  for(int i = 0; i < shine.length; i++)
+  {
+    shine[i] = new Star();
+  }
 }
+
 public void draw() 
 {
-  //your code here
+  background(0);
+  boat.show();
+  boat.move();
+  for(int i = 0 ; i < shine.length; i++)
+  {
+    shine[i].appear();
+  }
 }
-class SpaceShip //extends Floater  
+
+class SpaceShip extends Floater  
 {   
-    //your code here
+  public SpaceShip()
+  {
+  corners = 6;  //the number of corners, a triangular floater has 3   
+  xCorners = new int[corners];   
+  yCorners = new int[corners];
+  xCorners[0] = 25;
+  yCorners[0] = 0;
+  xCorners[1] = 0;
+  yCorners[1] = -10;
+  xCorners[2] = -10;
+  yCorners[2] = -5;
+  xCorners[3] = -1;
+  yCorners[3] = 0;
+  xCorners[4] = -10;
+  yCorners[4] = 5;
+  xCorners[5] = 0;
+  yCorners[5] = 10;
+  myColor = color(46,245,255);    
+  myCenterX = 500;
+  myCenterY = 500;
+  myDirectionX = 0;
+  myDirectionY = 0;
+  myPointDirection = 0/PI;
+  }
+  public void setX(int x){myCenterX = x;}  
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;}   
+  public void setDirectionX(double x){myDirectionX = x;}   
+  public double getDirectionX(){return (int)myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;}   
+  public double getDirectionY(){return (int)myDirectionY;}   
+  public void setPointDirection(int degrees){myPointDirection = degrees;}   
+  public double getPointDirection(){return (int)myPointDirection;} 
+}
+
+  // public void hyperspace()
+  //   {
+  //     boat.myCenterX = (Math.random()*401)+100;
+  //     boat.myCenterY = (Math.random()*401)+100;
+  //     boat.accelerate = 0;
+  //   }
+
+  public void keyPressed()
+  {
+    if(key == 'a'){boat.rotate(-5);}
+    if(key == 'd'){boat.rotate(5);}
+    if(key == 'w'){boat.accelerate(.5);}
+    if(key == 's'){boat.accelerate(-.5);}
+    if(key == 'q')
+      {
+        boat.setX((int)(Math.random()*1000));
+        boat.setY((int)(Math.random()*1000));
+        boat.setDirectionX(0);
+        boat.setDirectionY(0);
+      }
+    //if(key == 'spacebar') {;}
+  }
+
+class Star
+{
+  int myX,myY;
+  public Star()
+  {
+  myX = (int)(Math.random()*900);
+  myY = (int)(Math.random()*900);
+  }
+  public void appear()
+  {
+  fill(((int)Math.random()*16)+240,255,(int)Math.random()*256);
+  stroke(0);
+  ellipse(myX,myY,7,7);
+  }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -30,6 +119,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   abstract public double getDirectionY();   
   abstract public void setPointDirection(int degrees);   
   abstract public double getPointDirection(); 
+
 
   //Accelerates the floater in the direction it is pointing (myPointDirection)   
   public void accelerate (double dAmount)   
@@ -52,7 +142,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myCenterY += myDirectionY;     
 
     //wrap around screen    
-    if(myCenterX >width)
+    if(myCenterX > width)
     {     
       myCenterX = 0;    
     }    
@@ -60,7 +150,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     {     
       myCenterX = width;    
     }    
-    if(myCenterY >height)
+    if(myCenterY > height)
     {    
       myCenterY = 0;    
     }   
@@ -87,4 +177,3 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
-

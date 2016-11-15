@@ -4,8 +4,8 @@ Star[] shine;
 
 public void setup() 
 {
-  size(800,800);
-  shine = new Star[250];
+  size(600,600);
+  shine = new Star[200];
   for(int i = 0; i < shine.length; i++)
   {
     shine[i] = new Star();
@@ -56,8 +56,8 @@ class SpaceShip extends Floater
   xCorners[5] = 0;
   yCorners[5] = 10;
   myColor = color(46,245,255);    
-  myCenterX = 400;
-  myCenterY = 400;
+  myCenterX = 300;
+  myCenterY = 300;
   myDirectionX = 0;
   myDirectionY = 0;
   myPointDirection = 0/PI;
@@ -82,8 +82,8 @@ class SpaceShip extends Floater
     if(key == 's'){boat.accelerate(-.5);}
     if(key == 'q')
       {
-        boat.setX((int)(Math.random()*800));
-        boat.setY((int)(Math.random()*800));
+        boat.setX((int)(Math.random()*600));
+        boat.setY((int)(Math.random()*600));
         boat.setDirectionX(0);
         boat.setDirectionY(0);
       }
@@ -95,8 +95,8 @@ class Star
   int myX,myY;
   public Star()
   {
-  myX = (int)(Math.random()*800);
-  myY = (int)(Math.random()*800);
+  myX = (int)(Math.random()*600);
+  myY = (int)(Math.random()*600);
   }
   public void appear()
   {
@@ -136,8 +136,8 @@ class Asteroids extends Floater
   xCorners[9] = 30;
   yCorners[9] = 15;
   myColor = color(118,141,148);    
-  myCenterX = Math.random()*801;
-  myCenterY = Math.random()*801;
+  myCenterX = Math.random()*601;
+  myCenterY = Math.random()*601;
   myDirectionX = 0;
   myDirectionY = 0;
   myPointDirection = 0/PI;

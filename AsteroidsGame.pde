@@ -1,26 +1,38 @@
 SpaceShip boat = new SpaceShip();//your variable declarations here
-
+Asteroids[] rock;
 Star[] shine;
 
 public void setup() 
 {
   size(1000,1000);
-  
   shine = new Star[250];
   for(int i = 0; i < shine.length; i++)
   {
     shine[i] = new Star();
+  }
+  rock = new Asteroids[10];
+  for(int j = 0; j < rock.length; j++)
+  {
+    rock[j] = new Asteroids();
   }
 }
 
 public void draw() 
 {
   background(0);
-  boat.show();
-  boat.move();
+  //int score = 0 + 1;
+  
   for(int i = 0 ; i < shine.length; i++)
   {
     shine[i].appear();
+  }  
+  boat.show();
+  boat.move();
+  for(int j = 0; j < rock.length; j++)
+  {
+  rock[j].show();
+  rock[j].spin();
+  rock[j].move();
   }
 }
 
@@ -62,13 +74,6 @@ class SpaceShip extends Floater
   public double getPointDirection(){return (int)myPointDirection;} 
 }
 
-  // public void hyperspace()
-  //   {
-  //     boat.myCenterX = (Math.random()*401)+100;
-  //     boat.myCenterY = (Math.random()*401)+100;
-  //     boat.accelerate = 0;
-  //   }
-
   public void keyPressed()
   {
     if(key == 'a'){boat.rotate(-5);}
@@ -96,10 +101,93 @@ class Star
   public void appear()
   {
   fill(((int)Math.random()*16)+240,255,(int)Math.random()*256);
-  stroke(0);
+  noStroke();
   ellipse(myX,myY,7,7);
   }
 }
+
+class Asteroids extends Floater
+{
+  private int spin = (int)(Math.random()*20)-10;
+  private int soar = (int)(Math.random()*20)-10;
+  public Asteroids()
+  {
+  corners = 10;  //the number of corners, a triangular floater has 3   
+  xCorners = new int[corners];   
+  yCorners = new int[corners];
+  xCorners[0] = 45;
+  yCorners[0] = 0;
+  xCorners[1] = 30;
+  yCorners[1] = -15;
+  xCorners[2] = 10;
+  yCorners[2] = -22;
+  xCorners[3] = 22;
+  yCorners[3] = -15;
+  xCorners[4] = 12;
+  yCorners[4] = -27;
+  xCorners[5] = -5;
+  yCorners[5] = -15;
+  xCorners[6] = -15;
+  yCorners[6] = -7;
+  xCorners[7] = -3;
+  yCorners[7] = 15;
+  xCorners[8] = -2;
+  yCorners[8] = 22;
+  xCorners[9] = 30;
+  yCorners[9] = 15;
+  myColor = color(118,141,148);    
+  myCenterX = Math.random()*1001;
+  myCenterY = Math.random()*1001;
+  myDirectionX = 0;
+  myDirectionY = 0;
+  myPointDirection = 0/PI;
+  }
+  public void setX(int x){myCenterX = x;}  
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;}   
+  public void setDirectionX(double x){myDirectionX = x;}   
+  public double getDirectionX(){return (int)myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;}   
+  public double getDirectionY(){return (int)myDirectionY;}   
+  public void setPointDirection(int degrees){myPointDirection = degrees;}   
+  public double getPointDirection(){return (int)myPointDirection;}
+  public void spin(){myPointDirection+=spin;}   
+  public void move()
+  { 
+    if(spin >= 0)
+    {
+      myDirectionX = ((Math.random()*5)+3);
+      myDirectionY = ((Math.random()*5)+3);
+    }
+    else
+    {
+      myDirectionX = -((Math.random()*5)+3);
+      myDirectionY = -((Math.random()*5)+3);
+    }
+    // myCenterX+= soar;
+    // myCenterY+= soar;
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;      
+    if(myCenterX > width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY > height)
+    {    
+      myCenterY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;    
+    }   
+  }
+}
+
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   

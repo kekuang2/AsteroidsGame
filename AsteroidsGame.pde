@@ -4,7 +4,7 @@ Star[] shine;
 
 public void setup() 
 {
-  size(600,600);
+  size(1000,1000);
   shine = new Star[200];
   for(int i = 0; i < shine.length; i++)
   {
@@ -56,8 +56,8 @@ class SpaceShip extends Floater
   xCorners[5] = 0;
   yCorners[5] = 10;
   myColor = color(46,245,255);    
-  myCenterX = 300;
-  myCenterY = 300;
+  myCenterX = 500;
+  myCenterY = 500;
   myDirectionX = 0;
   myDirectionY = 0;
   myPointDirection = 0/PI;
@@ -82,8 +82,8 @@ class SpaceShip extends Floater
     if(key == 's'){boat.accelerate(-.5);}
     if(key == 'q')
       {
-        boat.setX((int)(Math.random()*600));
-        boat.setY((int)(Math.random()*600));
+        boat.setX((int)(Math.random()*1000));
+        boat.setY((int)(Math.random()*1000));
         boat.setDirectionX(0);
         boat.setDirectionY(0);
       }
@@ -95,8 +95,8 @@ class Star
   int myX,myY;
   public Star()
   {
-  myX = (int)(Math.random()*600);
-  myY = (int)(Math.random()*600);
+  myX = (int)(Math.random()*1000);
+  myY = (int)(Math.random()*1000);
   }
   public void appear()
   {
@@ -108,7 +108,7 @@ class Star
 
 class Asteroids extends Floater
 {
-  private int spin = (int)(Math.random()*20)-10;
+  private int spinaround = (int)(Math.random()*20)-10;
   private int soar = (int)(Math.random()*20)-10;
   public Asteroids()
   {
@@ -136,8 +136,8 @@ class Asteroids extends Floater
   xCorners[9] = 30;
   yCorners[9] = 15;
   myColor = color(118,141,148);    
-  myCenterX = Math.random()*601;
-  myCenterY = Math.random()*601;
+  myCenterX = Math.random()*1001;
+  myCenterY = Math.random()*1001;
   myDirectionX = 0;
   myDirectionY = 0;
   myPointDirection = 0/PI;
@@ -152,10 +152,10 @@ class Asteroids extends Floater
   public double getDirectionY(){return (int)myDirectionY;}   
   public void setPointDirection(int degrees){myPointDirection = degrees;}   
   public double getPointDirection(){return (int)myPointDirection;}
-  public void spin(){myPointDirection+=spin;}   
+  public void spin(){myPointDirection+=spinaround;}   
   public void move()
   { 
-    if(spin >= 0)
+    if(spinaround >= 0)
     {
       myDirectionX = ((Math.random()*5)+3);
       myDirectionY = ((Math.random()*5)+3);

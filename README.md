@@ -59,7 +59,7 @@ Samples of Student Work
 [Steven](http://crzysteven.github.io/AsteroidsGame/)  
 [Shaye](http://shayehong.github.io/AsteroidsGame/)  
 [Megan](http://meegee98.github.io/AsteroidsGame/)  
-[Thien](http://thtran1.github.io/AsteroidsGame/)  
+[Thien](+)  
 [Terrance](http://auxoworks.github.io/AsteroidsGame/)  
 [Melanie](http://melaniepeng.github.io/AsteroidsGame/)  
 [Brian](http://brianlam37.github.io/AsteroidsGame/)  

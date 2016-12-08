@@ -6,7 +6,7 @@ An `abstract` class is an "incomplete" class. It has `abstract` methods--incompl
 
 Suggested steps to complete this assignment
 -------------------------------------------
-
+Part 1
 1. Fork [this repository](https://github.com/APCSLowell/AsteroidsGame).
 2. Uncomment the `extends floater` on Line 10
 3. Complete the 10 abstract `set` and `get` functions
@@ -23,6 +23,7 @@ Suggested steps to complete this assignment
 
 These steps are only a suggestion. Your Asteroids game doesn't have to work or act like any other. Have fun and be creative.
 
+Part 2
 1. Write an Asteroid class that extends Floater. Make sure it's not inside the curly braces of any other class. You will need to write a constructor and the code to "finish" the abstract methods in the Floater class
 2. Add a int member variable of the Asteroid class. It will hold the speed of rotation for each asteroid. Make sure that this is initialized to have an equal probablility of being positive or negative. Also make sure to declare it appropriately (should it be public or private?)
 3. "Override" the move() method of the Floater class by writing a new move() method in the Asteroid class that also rotates each Asteroid at its own speed
@@ -31,9 +32,38 @@ These steps are only a suggestion. Your Asteroids game doesn't have to work or a
 6. Modify your code so that you have an array of Asteroids.
 7. Submit the URL of your working program to the school loop locker
 
+Part 3
 1. Modify your asteroids game to use an ArrayList instead of an array of asteroids. You may find the Asteroids powerpoint from slides #124 helpful. There is more on ArrayLists on the ArrayList worksheet.
 2. Now we'll modify the program so that when our space ship strikes an asteroid, the asteroid is removed from the ArrayList. Everytime an asteroid moves find the distance between that asteroid and the ship. Use processing's dist() function to find the distance between that asteroid and the ship. If the distance is less than 20 remove the asteroid from the ArrayList. Otherwise, move and rotate the asteroid normally
 3. Submit the same URL for your AsteroidsGame that you submitted for the two previous assignments to the school loop drop box.
+
+Part 4
+1. Create a new Bullet.pde file in your AsteroidsGame folder. One way to do this is in Sublime is to choose New | New File and then choose File | Save as and name your file Bullet.pde.
+2. On line 14 of index.html add Bullet.pde to the list of files in the data-processing-sources and choose File | Save.
+3. Write a Bullet class that extends Floater in Bullet.pde.
+4. Write a constructor that takes one ship argument: Bullet(SpaceShip theShip) This constructor will use the public "getter" (accessor) functions of the Spaceship class to:
+i.Intialize myCenterX and myCenterY of the bullet to be the same as the ship.
+ii. Initialize myPointDirection of the bullet to be the same as the direction the ship is pointing.
+iii. convert myPointDirection to radians with the following code: double dRadians =myPointDirection*(Math.PI/180);
+iv. Initialize myDirectionX as 5 * Math.cos(dRadians) + the directionX of the ship
+v. Initialize myDirectionY as 5 * Math.sin(dRadians) + the directionY of the ship
+5. Override the show() method of the Floater class so that you can use circular bullets
+6. Now, add just one bullet to your program. First, just draw it to the screen. Make sure you can see it before continuing to the next step.
+7. Now, move the bullet.
+8. Now create an ArrayList of Bullets. The list should be empty to start with. Everytime you press the key to "shoot", add a new Bullet to the ArrayList. Modify the program with loops that draw and move all the bullets in the ArrayList
+9.One way to check for collisions between the bullets and the Asteroids is to write a loop within a loop (see below for another way). Everytime you move one asteroid you will need:
+i. a loop that goes through all the bullets to see if there is a collision between that bullet and the asteroid
+ii. if there is a collision remove both the asteroid and the bullet from their ArrayLists the use break; to stop the loop to prevent any index out of bounds execptions.
+10. Alternatively, you might be able to use processing's get() to check for collisions.
+11. Submit the same URL for your AsteroidsGame that you submitted for the three previous assignments to the school loop drop box.
+
+If you have extra time, you might add some extra features to your Asteroids game. Have fun and be creative!
+
+-Randomly shaped Asteroids
+-Different types of weapons besides bullets
+-Have two Asteroids classes, one large and one small. When a large Asteroid is removed from the ArrayList add two small ones with the same x and y
+-Add a second ship (UFO) that appears after a while and shoots at the space ship
+-Keep track of the score and/or the health of the ship
 
 Samples of Student Work
 -----------------------

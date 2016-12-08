@@ -1,6 +1,7 @@
 SpaceShip boat = new SpaceShip();//your variable declarations here
 ArrayList<Asteroids> rock;
 Star[] shine;
+ArrayList<Bullet> bob;
 
 public void setup() 
 {
@@ -10,37 +11,63 @@ public void setup()
   {
     shine[i] = new Star();
   }
+
   rock = new ArrayList<Asteroids>();
   for(int j = 0; j < 15; j++)
   {
     rock.add(new Asteroids());
   }
+
+  bob = new ArrayList<Bullet>();
 }
 
 public void draw() 
 {
   background(0);
-  //int score = 0 + 1;
-  
+  //int score = 0; 
+
+  boat.show();
+  boat.move();
+
   for(int i = 0 ; i < shine.length; i++)
   {
     shine[i].appear();
   }  
-  boat.show();
-  boat.move();
+
   for(int j = 0; j < rock.size(); j++)
   {
   rock.get(j).show();
   rock.get(j).spin();
   rock.get(j).move();
-  // }
-  // for(int k = rock.size()-1; k >= 0; k--)
-  // {
-    if(dist(boat.getX(), boat.getY(), rock.get(j).getX(), rock.get(j).getY()) < 25)
+  if(dist(boat.getX(), boat.getY(), rock.get(j).getX(), rock.get(j).getY()) < 25)
+    {
     rock.remove(j);
+    rock.add(new Asteroids());
+    }
   }
-}
 
+  for(int m = 0; m < bob.size(); m++)
+  {
+    bob.get(m).show();
+    bob.get(m).move();
+  }
+  for(int l = rock.size()-1; l >= 0; l--)
+    {
+    for(int k = bob.size()-1; k >= 0; k--)
+      {
+      if(dist(rock.get(l).getX(), rock.get(l).getY(), bob.get(k).getX(), bob.get(k).getY()) < 25)
+        {
+        rock.remove(l);
+        rock.add(new Asteroids());
+        bob.remove(k);
+        //score = score + 10;
+        break;
+        }
+      }
+    }
+ // fill(255);
+  //text(score,50,50,20); 
+}
 class SpaceShip extends Floater  
 {   
   public SpaceShip()
@@ -92,9 +119,9 @@ class SpaceShip extends Floater
         boat.setDirectionX(0);
         boat.setDirectionY(0);
       }
-    //if(key == 'spacebar') {;}
+    if(key == ' ' && frameCount % 7 == 0){bob.add(new Bullet());}
   }
-
+  
 class Star
 {
   int myX,myY;
@@ -256,7 +283,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes to the Sp
   public void show ()  //Draws the floater at the current position  
   {             
     fill(myColor);   
-    stroke(myColor);    
+    stroke(myColor);  
     //convert degrees to radians for sin and cos         
     double dRadians = myPointDirection*(Math.PI/180);                 
     int xRotatedTranslated, yRotatedTranslated;    

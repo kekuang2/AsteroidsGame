@@ -119,7 +119,8 @@ class SpaceShip extends Floater
         boat.setDirectionX(0);
         boat.setDirectionY(0);
       }
-    if(key == ' ' && frameCount % 7 == 0){bob.add(new Bullet());}
+    //if(key == ' ' && frameCount % 7 == 0){bob.add(new Bullet());}
+    if(key == ' '){bob.add(new Bullet());}
   }
   
 class Star
